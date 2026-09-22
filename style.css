@@ -58,3 +58,27 @@ details li { margin: 0.1rem 0; overflow-wrap: anywhere; }
   dl { grid-template-columns: 1fr; gap: 0; }
   dd { margin-bottom: 0.75rem; }
 }
+
+.langs {
+  list-style: none;
+  padding: 0;
+}
+
+.langs li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.35rem 0;
+}
+
+.lang {
+  display: inline-flex;
+  width: 1.7rem;
+  height: 1.7rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
