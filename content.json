@@ -1,0 +1,289 @@
+{
+  "since": "2022-01",
+  "en": {
+    "name": "Shamil Abdulaev",
+    "role": "Python developer · Saint Petersburg",
+    "site_label": "Site",
+    "contacts": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ashm-dev"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/ashm-tech/"
+      },
+      {
+        "label": "Telegram",
+        "url": "https://t.me/ashamil435"
+      },
+      {
+        "label": "Email",
+        "url": "mailto:ashamil435@gmail.com"
+      }
+    ],
+    "summary": "Python developer ({years} in backend). I specialise in designing distributed services, asynchronous architecture and integration platforms. Hands-on experience splitting monoliths, deep refactoring of legacy code and shipping LLM pipelines to production. I work in Python and Go. Active open source contributor with accepted changes in infrastructure and application projects.",
+    "years": {
+      "one": "{n} year",
+      "few": "{n} years",
+      "many": "{n} years"
+    },
+    "headings": {
+      "experience": "Experience",
+      "languages": "Languages",
+      "oss": "Open source",
+      "cv": "CV (PDF)"
+    },
+    "oss_note": "Every pull request, patch and bug report, updated daily.",
+    "oss_pdf_note": "Accepted changes and reported issues; every item is linked on the site.",
+    "legend": {
+      "done": "merged or resolved",
+      "open": "open"
+    },
+    "nouns": {
+      "Pull requests": "PRs",
+      "Issues": "issues",
+      "Patches": "patches",
+      "Bugs": "bugs"
+    },
+    "verbs": {
+      "Pull requests": "merged",
+      "Patches": "committed"
+    },
+    "experience": [
+      {
+        "period": "Dec 2023 — now",
+        "title": "Python Developer",
+        "company": "Kartochka (now Omnium)",
+        "url": "https://omniumtech.ru",
+        "bullets": [
+          {
+            "lead": "PaaS / infrastructure",
+            "text": "Designed and launched an internal PaaS for isolated deployment and operation of customer instances of the platform."
+          },
+          {
+            "lead": "Architecture",
+            "text": "Split the monolith into services and set up CI/CD; the deploy cycle went from several hours to 15 minutes."
+          },
+          {
+            "lead": "Bitrix24 integration & MCP",
+            "text": "Built an integration layer over the Bitrix24 REST API (rate limits, edge cases, sync of CRM, tasks and smart processes). Wrote an MCP server that gives AI agents direct access to portal data."
+          },
+          {
+            "lead": "AI automation",
+            "text": "Built LLM pipelines for document analysis and data extraction, auto-filling CRM entities and embedding AI agents into business processes."
+          },
+          {
+            "lead": "Open source",
+            "text": "Maintain the company fork of the platform and send fixes upstream."
+          }
+        ]
+      },
+      {
+        "period": "Mar — Aug 2023",
+        "title": "Full Stack Developer",
+        "company": "Orbitsoft",
+        "url": "https://orbitsoft.com",
+        "bullets": [
+          {
+            "lead": "Refactoring and major migration (Django / DRF)",
+            "text": "Moved a service from Django 3.2 to 4.2 LTS. Untangled the legacy architecture: pulled business logic scattered across views and models into a service layer, resolved breaking changes and updated dependencies."
+          },
+          {
+            "lead": "Verification service in Go",
+            "text": "Designed and wrote a Linux utility service for security validation: checking digital signatures and certificates of Windows executables (.exe) against a trusted database."
+          },
+          {
+            "lead": "Open source (Plotly Dash)",
+            "text": "Fixed bugs and extended functionality in the upstream Plotly Dash repository for customer projects."
+          }
+        ]
+      },
+      {
+        "period": "Jan 2022 — Mar 2023",
+        "title": "Python Developer",
+        "company": "Escape Tech",
+        "url": "https://escape-team.tech",
+        "bullets": [
+          {
+            "lead": "Distributed data collection (Scrapy, Faust, Kafka)",
+            "text": "Designed collection pipelines for 150+ e-commerce sites with an hourly refresh cycle and stream processing of the queue in Faust/Kafka."
+          },
+          {
+            "lead": "Anti-bot bypass and rendering (Playwright)",
+            "text": "Set up stable scraping of complex SPA sites: dynamic proxy pools, session emulation, captcha solving and headless browsers via Playwright."
+          },
+          {
+            "lead": "Migration to Litestar and optimisation",
+            "text": "Rewrote a slow service from legacy Django 2.x / DRF to an async Litestar stack (with Kafka and PostgreSQL). Cut p95 response latency by more than 56% across all scenarios."
+          }
+        ]
+      }
+    ],
+    "languages": [
+      {
+        "code": "ru",
+        "text": "Russian — native"
+      },
+      {
+        "code": "av",
+        "text": "Avar — native"
+      },
+      {
+        "code": "en",
+        "text": "English — B1"
+      },
+      {
+        "code": "ar",
+        "text": "Arabic — A2"
+      },
+      {
+        "code": "he",
+        "text": "Hebrew — A2"
+      }
+    ]
+  },
+  "ru": {
+    "name": "Шамиль Абдулаев",
+    "role": "Python-разработчик · Санкт-Петербург",
+    "site_label": "Сайт",
+    "contacts": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ashm-dev"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/ashm-tech/"
+      },
+      {
+        "label": "Telegram",
+        "url": "https://t.me/ashamil435"
+      },
+      {
+        "label": "Почта",
+        "url": "mailto:ashamil435@gmail.com"
+      }
+    ],
+    "summary": "Python-разработчик ({years} в бэкенде). Специализируюсь на проектировании распределённых сервисов, асинхронной архитектуре и интеграционных платформах. Имею практический опыт распила монолитов, глубокого рефакторинга легаси и внедрения LLM-пайплайнов в продакшн. В работе использую Python и Go. Активный участник open-source сообщества с принятыми доработками в инфраструктурные и прикладные проекты.",
+    "years": {
+      "one": "{n} год",
+      "few": "{n} года",
+      "many": "{n} лет"
+    },
+    "headings": {
+      "experience": "Опыт",
+      "languages": "Языки",
+      "oss": "Open source",
+      "cv": "Резюме (PDF)"
+    },
+    "oss_note": "Все pull request, патчи и баг-репорты, обновляется ежедневно.",
+    "oss_pdf_note": "Принятые изменения и заведённые баги; каждый пункт со ссылкой есть на сайте.",
+    "legend": {
+      "done": "принято или решено",
+      "open": "открыто"
+    },
+    "nouns": {
+      "Pull requests": "PR",
+      "Issues": "issues",
+      "Patches": "патчей",
+      "Bugs": "багов"
+    },
+    "verbs": {
+      "Pull requests": "принятых",
+      "Patches": "принятых"
+    },
+    "experience": [
+      {
+        "period": "дек 2023 — н. в.",
+        "title": "Python-разработчик",
+        "company": "Карточка (сейчас Omnium)",
+        "url": "https://omniumtech.ru",
+        "bullets": [
+          {
+            "lead": "PaaS / Инфраструктура",
+            "text": "Спроектировал и запустил внутренний PaaS для изолированного развёртывания и обслуживания клиентских инстансов платформы."
+          },
+          {
+            "lead": "Архитектура",
+            "text": "Распилил монолит на сервисы, настроил CI/CD; сократил цикл деплоя с нескольких часов до 15 минут."
+          },
+          {
+            "lead": "Интеграция с Bitrix24 & MCP",
+            "text": "Разработал интеграционный слой под Bitrix24 REST API (учёт лимитов, обработка краевых кейсов, синхронизация CRM, задач и смарт-процессов). Написал собственный MCP-сервер для прямого доступа ИИ-агентов к данным портала."
+          },
+          {
+            "lead": "AI-автоматизация",
+            "text": "Построил пайплайны на базе LLM для анализа и извлечения данных из документов, автозаполнения сущностей в CRM и интеграции ИИ-агентов в бизнес-процессы."
+          },
+          {
+            "lead": "Open Source",
+            "text": "Сопровождаю корпоративный форк платформы, отправляю правки в апстрим."
+          }
+        ]
+      },
+      {
+        "period": "мар 2023 — авг 2023",
+        "title": "Full Stack-разработчик",
+        "company": "Орбитсофт",
+        "url": "https://orbitsoft.com",
+        "bullets": [
+          {
+            "lead": "Рефакторинг и мажорная миграция (Django / DRF)",
+            "text": "Перевёл сервис с Django 3.2 на 4.2 (LTS). Распутал легаси-архитектуру: вынес размазанную бизнес-логику из контроллеров и моделей в сервисный слой, устранил breaking changes и обновил зависимости."
+          },
+          {
+            "lead": "Разработка сервиса верификации на Go",
+            "text": "Спроектировал и написал утилитарный сервис под Linux для валидации безопасности: проверка цифровых подписей и сертификатов исполняемых файлов Windows (.exe) по доверенной базе данных."
+          },
+          {
+            "lead": "Open Source (Plotly Dash)",
+            "text": "Устранял баги и дорабатывал функциональность в апстрим-репозитории Plotly Dash под проектные задачи клиентов."
+          }
+        ]
+      },
+      {
+        "period": "янв 2022 — мар 2023",
+        "title": "Python-разработчик",
+        "company": "Escape Tech",
+        "url": "https://escape-team.tech",
+        "bullets": [
+          {
+            "lead": "Распределённый сбор данных (Scrapy, Faust, Kafka)",
+            "text": "Спроектировал пайплайны сбора данных со 150+ сайтов e-commerce с ежечасным циклом обновления и потоковой обработкой очереди в Faust/Kafka."
+          },
+          {
+            "lead": "Обход защит и рендеринг (Playwright)",
+            "text": "Настроил стабильный парсинг сложных SPA-ресурсов: динамические пулы прокси, эмуляция сессий, решение капчи и headless-браузеры через Playwright."
+          },
+          {
+            "lead": "Миграция на Litestar и оптимизация",
+            "text": "Переписал тормозящий сервис с легаси Django 2.x / DRF на асинхронный стек Litestar (в связке с Kafka и PostgreSQL). Сократил задержку отклика (p95 latency) более чем на 56% по всем сценариям."
+          }
+        ]
+      }
+    ],
+    "languages": [
+      {
+        "code": "ru",
+        "text": "Русский — родной"
+      },
+      {
+        "code": "av",
+        "text": "Аварский — родной"
+      },
+      {
+        "code": "en",
+        "text": "Английский — B1"
+      },
+      {
+        "code": "ar",
+        "text": "Арабский — A2"
+      },
+      {
+        "code": "he",
+        "text": "Иврит — A2"
+      }
+    ]
+  }
+}

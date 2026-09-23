@@ -24,42 +24,29 @@
 </head>
 <body>
   <header>
-    <h1>Shamil Abdulaev</h1>
-    <p class="role">Python developer · Saint Petersburg</p>
-    <p class="contacts">
-      <a href="https://github.com/ashm-dev">GitHub</a>
-      <a href="https://www.linkedin.com/in/ashm-tech/">LinkedIn</a>
-      <a href="https://t.me/ashamil435">Telegram</a>
-      <a href="mailto:ashamil435@gmail.com">Email</a>
-    </p>
+    <div class="top">
+      <h1 id="name">Shamil Abdulaev</h1>
+      <p class="switch"><button type="button" data-lang="en">en</button><button type="button" data-lang="ru">ru</button></p>
+    </div>
+    <p class="role" id="role"></p>
+    <p class="contacts" id="contacts"></p>
   </header>
 
   <main>
-    <p>Backend in Python, with a habit of going below the framework: CPython internals, glibc, database drivers. I find memory-safety and concurrency bugs with sanitizers and land the fixes upstream.</p>
+    <p id="summary"></p>
 
-    <h2>Experience</h2>
-    <dl>
-      <dt>Dec 2023 — now</dt>
-      <dd><b>Python Developer</b>, <a href="https://omniumtech.ru">Kartochka (now Omnium)</a><br><span class="muted">Bitrix24 integrations, REST APIs, Telegram bots, Celery/Taskiq, AI integrations. Split a monolith into services, cut deploys from hours to 15 minutes.</span></dd>
-      <dt>Mar — Aug 2023</dt>
-      <dd><b>Full Stack Developer</b>, <a href="https://orbitsoft.com">Orbitsoft</a><br><span class="muted">Django, DRF, FastAPI, Flask, Vue.js, Plotly/Dash.</span></dd>
-      <dt>Jan 2022 — Mar 2023</dt>
-      <dd><b>Python Developer</b>, <a href="https://escape-team.tech">Escape Tech</a><br><span class="muted">Scraping systems on Scrapy and Faust, APIs on aiohttp and litestar. Moved a Django/DRF service to litestar, 56% faster.</span></dd>
-    </dl>
+    <h2 id="h-experience"></h2>
+    <dl id="experience"></dl>
 
-    <h2>Languages</h2>
-    <ul class="langs">
-      <li><span class="lang">ru</span>Russian — native</li>
-      <li><span class="lang">av</span>Avar — native</li>
-      <li><span class="lang">en</span>English — B1</li>
-      <li><span class="lang">ar</span>Arabic — A2</li>
-      <li><span class="lang">he</span>Hebrew — A2</li>
-    </ul>
+    <h2 id="h-languages"></h2>
+    <ul class="langs" id="languages"></ul>
 
-    <h2>Open source</h2>
-    <p class="muted">Every pull request, patch and bug report, updated daily. <span class="dot done"></span> merged or resolved, <span class="dot open"></span> open.</p>
+    <h2 id="h-oss"></h2>
+    <p class="muted" id="oss-note"></p>
     <div id="projects"><p class="muted">Loading…</p></div>
   </main>
+
+  <footer><a id="cv" href="cv-en.pdf" class="muted">CV (PDF)</a></footer>
   <script src="app.js"></script>
 </body>
 </html>

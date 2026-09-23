@@ -38,7 +38,7 @@ h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
 
 h2 { margin: 2.5rem 0 0.75rem; font-size: 1rem; font-weight: 700; padding-bottom: 0.3rem; border-bottom: 1px solid var(--line); }
 
-dl { display: grid; grid-template-columns: 11rem 1fr; gap: 0.5rem 1rem; margin: 0; }
+dl { display: grid; grid-template-columns: 13rem 1fr; gap: 0.5rem 1rem; margin: 0; }
 dt { color: var(--muted); }
 dd { margin: 0; }
 
@@ -81,4 +81,51 @@ details li { margin: 0.1rem 0; overflow-wrap: anywhere; }
   border-radius: 50%;
   font-size: 0.7rem;
   color: var(--muted);
+}
+
+.top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.switch {
+  margin: 0;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.switch button {
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0.05rem 0.45rem;
+  cursor: pointer;
+}
+
+.switch button[aria-current="true"] {
+  color: var(--fg);
+  border-color: var(--line);
+}
+
+footer {
+  margin-top: 4rem;
+  font-size: 0.85rem;
+}
+
+footer a {
+  color: var(--muted);
+}
+
+.bullets {
+  margin: 0.3rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.bullets li {
+  margin: 0.2rem 0;
 }
