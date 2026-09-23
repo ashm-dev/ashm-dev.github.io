@@ -15,14 +15,30 @@ function pickLang() {
   return (navigator.language || "").toLowerCase().startsWith("ru") ? "ru" : "en";
 }
 
-function yearsSince(since, forms) {
-  const [y, m] = since.split("-").map(Number);
-  const now = new Date();
-  const n = Math.max(1, Math.floor((now.getFullYear() * 12 + now.getMonth() + 1 - (y * 12 + m)) / 12));
+function plural(n, forms) {
   const mod10 = n % 10;
   const mod100 = n % 100;
   const form = mod10 === 1 && mod100 !== 11 ? "one" : mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14) ? "few" : "many";
   return forms[form].replace("{n}", String(n));
+}
+
+function monthsBetween(start, end) {
+  const [y1, m1] = start.split("-").map(Number);
+  const now = new Date();
+  const [y2, m2] = end ? end.split("-").map(Number) : [now.getFullYear(), now.getMonth() + 1];
+  return Math.max(1, y2 * 12 + m2 - (y1 * 12 + m1) + 1);
+}
+
+function yearsSince(since, forms) {
+  return plural(Math.max(1, Math.floor(monthsBetween(since, null) / 12)), forms);
+}
+
+function duration(job, forms) {
+  const months = monthsBetween(job.start, job.end);
+  const parts = [];
+  if (months >= 12) parts.push(plural(Math.floor(months / 12), forms.year));
+  if (months % 12) parts.push(plural(months % 12, forms.month));
+  return parts.join(" ");
 }
 
 function landed(section) {
@@ -59,7 +75,7 @@ function renderProfile(t, lang, since) {
   document.getElementById("h-languages").textContent = t.headings.languages;
   document.getElementById("h-oss").textContent = t.headings.oss;
   document.getElementById("experience").replaceChildren(...t.experience.flatMap((job) => [
-    el("dt", {}, [job.period]),
+    el("dt", {}, [job.period, el("br"), el("span", { class: "muted" }, [duration(job, t.duration)])]),
     el("dd", {}, [
       el("b", {}, [job.title]), ", ", el("a", { href: job.url }, [job.company]),
       el("ul", { class: "bullets" }, job.bullets.map((b) => el("li", {}, [el("b", {}, [`${b.lead}: `]), b.text]))),

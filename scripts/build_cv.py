@@ -19,10 +19,7 @@ DONE = "done"
 FULL_LIST_URL = "https://ashm-dev.github.io/"
 
 
-def years_since(since, forms):
-    year, month = (int(part) for part in since.split("-"))
-    today = datetime.date.today()
-    n = max(1, (today.year * 12 + today.month - (year * 12 + month)) // 12)
+def plural(n, forms):
     if n % 10 == 1 and n % 100 != 11:
         form = "one"
     elif 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
@@ -30,6 +27,30 @@ def years_since(since, forms):
     else:
         form = "many"
     return forms[form].replace("{n}", str(n))
+
+
+def months_between(start, end):
+    year1, month1 = (int(part) for part in start.split("-"))
+    if end:
+        year2, month2 = (int(part) for part in end.split("-"))
+    else:
+        today = datetime.date.today()
+        year2, month2 = today.year, today.month
+    return max(1, year2 * 12 + month2 - (year1 * 12 + month1) + 1)
+
+
+def years_since(since, forms):
+    return plural(max(1, months_between(since, None) // 12), forms)
+
+
+def duration(job, forms):
+    months = months_between(job["start"], job["end"])
+    parts = []
+    if months >= 12:
+        parts.append(plural(months // 12, forms["year"]))
+    if months % 12:
+        parts.append(plural(months % 12, forms["month"]))
+    return " ".join(parts)
 
 
 def register_fonts():
@@ -79,7 +100,7 @@ def profile_blocks(t, since, st):
     blocks += heading(t["headings"]["experience"], st)
     for job in t["experience"]:
         blocks.append(Paragraph(f"<b>{esc(job['title'])}</b>, {link(job['url'], job['company'])}", st["body"]))
-        blocks.append(Paragraph(esc(job["period"]), st["muted"]))
+        blocks.append(Paragraph(f"{esc(job['period'])} · {esc(duration(job, t['duration']))}", st["muted"]))
         blocks.append(Spacer(1, 3))
         blocks += [Paragraph(f"• <b>{esc(b['lead'])}:</b> {esc(b['text'])}", st["bullet"]) for b in job["bullets"]]
         blocks.append(Spacer(1, 8))

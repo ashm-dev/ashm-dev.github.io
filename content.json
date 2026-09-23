@@ -77,7 +77,9 @@
             "lead": "Open source",
             "text": "Maintain the company fork of the platform and send fixes upstream."
           }
-        ]
+        ],
+        "start": "2023-12",
+        "end": null
       },
       {
         "period": "Mar — Aug 2023",
@@ -97,7 +99,9 @@
             "lead": "Open source (Plotly Dash)",
             "text": "Fixed bugs and extended functionality in the upstream Plotly Dash repository for customer projects."
           }
-        ]
+        ],
+        "start": "2023-03",
+        "end": "2023-08"
       },
       {
         "period": "Jan 2022 — Mar 2023",
@@ -117,7 +121,9 @@
             "lead": "Migration to Litestar and optimisation",
             "text": "Rewrote a slow service from legacy Django 2.x / DRF to an async Litestar stack (with Kafka and PostgreSQL). Cut p95 response latency by more than 56% across all scenarios."
           }
-        ]
+        ],
+        "start": "2022-01",
+        "end": "2023-03"
       }
     ],
     "languages": [
@@ -141,7 +147,19 @@
         "code": "he",
         "text": "Hebrew — A2"
       }
-    ]
+    ],
+    "duration": {
+      "year": {
+        "one": "{n} yr",
+        "few": "{n} yrs",
+        "many": "{n} yrs"
+      },
+      "month": {
+        "one": "{n} mo",
+        "few": "{n} mo",
+        "many": "{n} mo"
+      }
+    }
   },
   "ru": {
     "name": "Шамиль Абдулаев",
@@ -220,7 +238,9 @@
             "lead": "Open Source",
             "text": "Сопровождаю корпоративный форк платформы, отправляю правки в апстрим."
           }
-        ]
+        ],
+        "start": "2023-12",
+        "end": null
       },
       {
         "period": "мар 2023 — авг 2023",
@@ -240,7 +260,9 @@
             "lead": "Open Source (Plotly Dash)",
             "text": "Устранял баги и дорабатывал функциональность в апстрим-репозитории Plotly Dash под проектные задачи клиентов."
           }
-        ]
+        ],
+        "start": "2023-03",
+        "end": "2023-08"
       },
       {
         "period": "янв 2022 — мар 2023",
@@ -260,7 +282,9 @@
             "lead": "Миграция на Litestar и оптимизация",
             "text": "Переписал тормозящий сервис с легаси Django 2.x / DRF на асинхронный стек Litestar (в связке с Kafka и PostgreSQL). Сократил задержку отклика (p95 latency) более чем на 56% по всем сценариям."
           }
-        ]
+        ],
+        "start": "2022-01",
+        "end": "2023-03"
       }
     ],
     "languages": [
@@ -284,6 +308,18 @@
         "code": "he",
         "text": "Иврит — A2"
       }
-    ]
+    ],
+    "duration": {
+      "year": {
+        "one": "{n} год",
+        "few": "{n} года",
+        "many": "{n} лет"
+      },
+      "month": {
+        "one": "{n} мес",
+        "few": "{n} мес",
+        "many": "{n} мес"
+      }
+    }
   }
 }
