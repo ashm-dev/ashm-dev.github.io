@@ -12,9 +12,10 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import HRFlowable, Paragraph, SimpleDocTemplate, Spacer
 
+from contribution_summary import summary
+
 ROOT = Path(__file__).resolve().parent.parent
 FONTS = ROOT / "fonts"
-DONE = "done"
 
 FULL_LIST_URL = "https://ashm-dev.github.io/"
 
@@ -81,16 +82,6 @@ def link(url, label):
     return f'<link href="{esc(url)}">{esc(label)}</link>'
 
 
-def landed(section):
-    return sum(1 for item in section["items"] if item["state"] == DONE)
-
-
-def summary(project, t):
-    first, second = project["sections"]
-    verb = t["verbs"].get(first["title"], t["verbs"]["Pull requests"])
-    return f"{landed(first)} {verb} {t['nouns'][first['title']]} · {len(second['items'])} {t['nouns'][second['title']]}"
-
-
 def profile_blocks(t, since, st):
     blocks = [Paragraph(esc(t["name"]), st["name"]), Paragraph(esc(t["role"]), st["muted"]), Spacer(1, 8)]
     blocks.append(Paragraph(f"{esc(t['site_label'])}: {link(FULL_LIST_URL, FULL_LIST_URL)}", st["body"]))
@@ -111,7 +102,6 @@ def profile_blocks(t, since, st):
 
 def oss_blocks(projects, t, st):
     blocks = heading(t["headings"]["oss"], st)
-    blocks += [Paragraph(esc(t["oss_pdf_note"]), st["muted"]), Spacer(1, 6)]
     blocks += [Paragraph(f"<b>{esc(project['name'])}</b> — {esc(summary(project, t))}", st["body"]) for project in projects]
     return blocks
 

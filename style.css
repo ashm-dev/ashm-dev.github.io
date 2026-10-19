@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   --bg: #ffffff;
   --fg: #1f2328;
@@ -128,4 +142,15 @@ footer a {
 
 .bullets li {
   margin: 0.2rem 0;
+}
+
+.project-counts {
+  display: block;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 600px) {
+  .top { flex-wrap: wrap; }
 }
