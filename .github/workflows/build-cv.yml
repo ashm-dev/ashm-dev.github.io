@@ -1,30 +1,63 @@
-name: Build CV
+name: Build and deploy site
 
 on:
   schedule:
-    - cron: "17 7 * * *"
+    - cron: "47 */3 * * *"
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [content.json, scripts/**, tests/**, '*.js', package.json, fonts/**, .github/workflows/build-cv.yml]
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
       - run: npm test
+      - run: python3 -m pip install --retries 3 --timeout 30 -r requirements.txt
       - run: python3 -B -m unittest discover -s scripts -v
-      - run: pip install reportlab
-      - run: curl -fsSL https://raw.githubusercontent.com/ashm-dev/ashm-dev/main/contributions.json -o contributions.json
-      - run: python3 scripts/build_cv.py contributions.json
-      - run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add cv-en.pdf cv-ru.pdf
-          git diff --cached --quiet && exit 0
-          git commit -m "chore(cv): rebuild PDF"
-          git push
+      - name: Download profile data
+        run: >-
+          curl --fail --silent --show-error --location
+          --retry 2 --retry-all-errors --retry-delay 5 --connect-timeout 15 --max-time 60
+          https://raw.githubusercontent.com/ashm-dev/ashm-dev/main/contributions.json
+          --output contributions.json
+      - name: Build site artifact
+        run: |
+          mkdir _site
+          cp index.html style.css content.json ./*.js _site/
+          cp -r fonts _site/
+          python3 -B scripts/build_cv.py contributions.json _site
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy site
+        id: deployment
+        uses: actions/deploy-pages@v5

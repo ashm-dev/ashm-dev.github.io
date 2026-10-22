@@ -113,13 +113,15 @@ def build(lang, content, projects, out):
     doc.build(profile_blocks(content[lang], content["since"], st) + oss_blocks(projects, content[lang], st))
 
 
-def main(contributions_path):
+def main(contributions_path, output_dir=ROOT):
     register_fonts()
     content = json.loads((ROOT / "content.json").read_text())
     projects = json.loads(Path(contributions_path).read_text())
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
     for lang in ("en", "ru"):
-        build(lang, content, projects, ROOT / f"cv-{lang}.pdf")
+        build(lang, content, projects, output_dir / f"cv-{lang}.pdf")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else ROOT)
