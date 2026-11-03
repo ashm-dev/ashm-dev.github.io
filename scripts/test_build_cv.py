@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 from reportlab.platypus import Paragraph, SimpleDocTemplate
 
-from build_cv import ROOT, build, main, register_fonts
+from build_cv import ROOT, build, main, profile_blocks, register_fonts, styles
 
 
 class BuildCVTest(unittest.TestCase):
@@ -32,7 +32,7 @@ class BuildCVTest(unittest.TestCase):
                 self.assertGreater(len(pdf), 1000)
         self.assertEqual([hashlib.sha256(path.read_bytes()).hexdigest() for path in tracked], before)
 
-    def test_open_source_is_the_first_experience_entry_in_both_languages(self):
+    def test_open_source_section_precedes_commercial_experience_in_both_languages(self):
         register_fonts()
         content = json.loads((ROOT / "content.json").read_text())
         projects = [
@@ -44,18 +44,36 @@ class BuildCVTest(unittest.TestCase):
             ("ru", ["python/cpython — PR: 6 принято", "glibc — Патчи: 6 принято"], "ноя 2023 — ноя 2026"),
         ]:
             with self.subTest(lang=lang):
-                with patch("build_cv.SimpleDocTemplate") as document:
-                    build(lang, content, projects, "unused.pdf")
-                blocks = document.return_value.build.call_args.args[0]
-                text = [block.getPlainText() for block in blocks if isinstance(block, Paragraph)]
-                experience = text.index(content[lang]["headings"]["experience"])
-                job = content[lang]["experience"][0]
+                t = {**content[lang], "summary": "Profile summary.", "oss_summary": "Core runtime contributions."}
+                blocks = profile_blocks(t, content["since"], projects, styles())
+                paragraphs = [block for block in blocks if isinstance(block, Paragraph)]
+                text = [block.getPlainText() for block in paragraphs]
+                experience = text.index(t["headings"]["experience"])
+                job = t["experience"][0]
                 company = f"{job['title']}, {job['company']}"
-                self.assertEqual(text[experience + 1:experience + 5], ["OpenSource", *summaries, company])
+                self.assertEqual(text[experience - 4:experience], [t["headings"]["oss"], "Core runtime contributions.", *summaries])
+                self.assertEqual(text[experience + 1], company)
                 self.assertTrue(text[text.index(company) + 1].startswith(period + " · "))
-                self.assertEqual(text.count("OpenSource"), 1)
+                self.assertEqual(text.count(t["headings"]["oss"]), 1)
+                self.assertEqual(paragraphs[experience - 4].style.name, "h2")
+                self.assertEqual(text[experience - 5], "Profile summary.")
                 for line in summaries:
                     self.assertEqual(text.count(line), 1)
+
+    def test_experience_bullets_are_plain_text_in_both_languages(self):
+        register_fonts()
+        content = json.loads((ROOT / "content.json").read_text())
+        for lang in ("en", "ru"):
+            with self.subTest(lang=lang):
+                t = content[lang]
+                bullets = [bullet for job in t["experience"] for bullet in job["bullets"]]
+                for bullet in bullets:
+                    self.assertIsInstance(bullet, str)
+                blocks = profile_blocks(t, content["since"], [], styles())
+                rendered = [block for block in blocks if isinstance(block, Paragraph) and block.style.name == "bullet"]
+                self.assertEqual([block.getPlainText() for block in rendered], [f"• {bullet}" for bullet in bullets])
+                for block in rendered:
+                    self.assertNotIn("<b>", block.text)
 
     def test_employment_headers_stay_with_the_first_bullet(self):
         register_fonts()
@@ -79,7 +97,7 @@ class BuildCVTest(unittest.TestCase):
                 build("ru", content, projects, Path(directory) / "cv.pdf")
         for job in content["ru"]["experience"]:
             company = f"{job['title']}, {job['company']}"
-            first_bullet = f"• {job['bullets'][0]['lead']}: {job['bullets'][0]['text']}"
+            first_bullet = f"• {job['bullets'][0]}"
             self.assertEqual(pages[company], pages[first_bullet], company)
 
     def test_invalid_data_does_not_produce_a_publishable_artifact(self):

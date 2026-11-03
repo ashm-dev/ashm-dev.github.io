@@ -30,6 +30,7 @@ export function renderProfile(t, lang, since) {
   document.getElementById("contacts").replaceChildren(...t.contacts.map((c) => el("a", { href: c.url }, [c.label])));
   const years = plural(Math.max(1, Math.floor(monthsBetween(since, null) / 12)), t.years);
   document.getElementById("summary").textContent = t.summary.replace("{years}", years);
+  document.getElementById("oss-summary").textContent = t.oss_summary;
   document.getElementById("h-experience").textContent = t.headings.experience;
   document.getElementById("h-languages").textContent = t.headings.languages;
   document.getElementById("h-oss").textContent = t.headings.oss;
@@ -37,7 +38,7 @@ export function renderProfile(t, lang, since) {
     el("dt", {}, [job.period, el("br"), el("span", { class: "muted" }, [duration(job, t.duration)])]),
     el("dd", {}, [
       el("b", {}, [job.title]), ", ", el("a", { href: job.url }, [job.company]),
-      el("ul", { class: "bullets" }, job.bullets.map((b) => el("li", {}, [el("b", {}, [`${b.lead}: `]), b.text]))),
+      el("ul", { class: "bullets" }, job.bullets.map((b) => el("li", {}, [b]))),
     ]),
   ]));
   document.getElementById("languages").replaceChildren(...t.languages.map((l) => el("li", {}, [el("span", { class: "lang" }, [l.code]), l.text])));

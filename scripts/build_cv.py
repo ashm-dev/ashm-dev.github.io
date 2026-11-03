@@ -91,12 +91,12 @@ def profile_blocks(t, since, projects, st):
     blocks += [Paragraph(f"{esc(c['label'])}: {link(c['url'], c['url'].removeprefix('mailto:'))}", st["body"]) for c in t["contacts"]]
     summary_text = t["summary"].replace("{years}", years_since(since, t["years"]))
     blocks += [Spacer(1, 12), Paragraph(esc(summary_text), st["body"])]
-    blocks += heading(t["headings"]["experience"], st)
     blocks += oss_blocks(projects, t, st)
+    blocks += heading(t["headings"]["experience"], st)
     for job in t["experience"]:
         blocks.append(Paragraph(f"<b>{esc(job['title'])}</b>, {link(job['url'], job['company'])}", st["job"]))
         blocks.append(Paragraph(f"{esc(job['period'])} · {esc(duration(job, t['duration']))}", st["period"]))
-        blocks += [Paragraph(f"• <b>{esc(b['lead'])}:</b> {esc(b['text'])}", st["bullet"]) for b in job["bullets"]]
+        blocks += [Paragraph(f"• {esc(b)}", st["bullet"]) for b in job["bullets"]]
         blocks.append(Spacer(1, 8))
     blocks += heading(t["headings"]["languages"], st)
     blocks += [Paragraph(esc(lang_item["text"]), st["body"]) for lang_item in t["languages"]]
@@ -104,7 +104,8 @@ def profile_blocks(t, since, projects, st):
 
 
 def oss_blocks(projects, t, st):
-    blocks = [Paragraph(f"<b>{esc(t['headings']['oss'])}</b>", st["job"]), Spacer(1, 3)]
+    blocks = heading(t["headings"]["oss"], st)
+    blocks.append(Paragraph(esc(t["oss_summary"]), st["body"]))
     blocks += [Paragraph(f"<b>{esc(project['name'])}</b> — {esc(summary(project, t))}", st["body"]) for project in projects]
     return blocks + [Spacer(1, 8)]
 
