@@ -53,10 +53,7 @@
     ],
     "languages": [
       {"code": "ru", "text": "Russian — native"},
-      {"code": "av", "text": "Avar — native"},
-      {"code": "en", "text": "English — B1"},
-      {"code": "ar", "text": "Arabic — A2"},
-      {"code": "he", "text": "Hebrew — A2"}
+      {"code": "en", "text": "English — B1"}
     ],
     "duration": {
       "year": {"one": "{n} yr", "few": "{n} yrs", "many": "{n} yrs"},
@@ -116,10 +113,7 @@
     ],
     "languages": [
       {"code": "ru", "text": "Русский — родной"},
-      {"code": "av", "text": "Аварский — родной"},
-      {"code": "en", "text": "Английский — B1"},
-      {"code": "ar", "text": "Арабский — A2"},
-      {"code": "he", "text": "Иврит — A2"}
+      {"code": "en", "text": "Английский — B1"}
     ],
     "duration": {
       "year": {"one": "{n} год", "few": "{n} года", "many": "{n} лет"},
