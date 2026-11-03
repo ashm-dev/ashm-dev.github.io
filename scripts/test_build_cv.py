@@ -7,9 +7,9 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from reportlab.platypus import Paragraph, SimpleDocTemplate
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
 
-from build_cv import ROOT, build, main, profile_blocks, register_fonts, styles
+from build_cv import FULL_LIST_URL, ROOT, build, main, profile_blocks, register_fonts, styles
 
 
 class BuildCVTest(unittest.TestCase):
@@ -31,6 +31,23 @@ class BuildCVTest(unittest.TestCase):
                 self.assertTrue(pdf.startswith(b"%PDF-"))
                 self.assertGreater(len(pdf), 1000)
         self.assertEqual([hashlib.sha256(path.read_bytes()).hexdigest() for path in tracked], before)
+
+    def test_contacts_share_one_compact_linked_paragraph(self):
+        register_fonts()
+        content = json.loads((ROOT / "content.json").read_text())
+        for lang in ("en", "ru"):
+            with self.subTest(lang=lang):
+                blocks = profile_blocks(content[lang], content["since"], [], styles())
+                paragraphs = [block for block in blocks if isinstance(block, Paragraph)]
+                contacts = paragraphs[2]
+                self.assertEqual(contacts.getPlainText(), "ashm-dev.github.io · GitHub · LinkedIn · Telegram · ashamil435@gmail.com")
+                self.assertEqual([target for fragment in contacts.frags for _, target in fragment.link], [
+                    FULL_LIST_URL, "https://github.com/ashm-dev", "https://www.linkedin.com/in/ashm-tech/",
+                    "https://t.me/ashamil435", "mailto:ashamil435@gmail.com",
+                ])
+                self.assertIsInstance(blocks[blocks.index(contacts) + 1], Spacer)
+                self.assertEqual(blocks[blocks.index(contacts) + 1].height, 8)
+                self.assertIs(paragraphs[3], blocks[blocks.index(contacts) + 2])
 
     def test_open_source_section_precedes_commercial_experience_in_both_languages(self):
         register_fonts()
@@ -57,6 +74,9 @@ class BuildCVTest(unittest.TestCase):
                 self.assertEqual(text.count(t["headings"]["oss"]), 1)
                 self.assertEqual(paragraphs[experience - 4].style.name, "h2")
                 self.assertEqual(text[experience - 5], "Profile summary.")
+                self.assertEqual(paragraphs[experience - 3].getSpaceAfter(), 4)
+                for item in paragraphs[experience - 2:experience]:
+                    self.assertEqual(item.getSpaceAfter(), 1.5)
                 for line in summaries:
                     self.assertEqual(text.count(line), 1)
 
@@ -75,30 +95,43 @@ class BuildCVTest(unittest.TestCase):
                 for block in rendered:
                     self.assertNotIn("<b>", block.text)
 
-    def test_employment_headers_stay_with_the_first_bullet(self):
+    def test_both_resumes_fit_one_page_without_splitting_employment(self):
         register_fonts()
         content = json.loads((ROOT / "content.json").read_text())
         projects = [{
             "name": name,
-            "sections": [{"title": section, "items": [{"state": "done"} for _ in range(6)]}],
-        } for name, section in [
-            ("python/cpython", "Pull requests"), ("glibc", "Patches"),
-            ("python/typeshed", "Pull requests"), ("open-webui/open-webui", "Pull requests"),
+            "sections": [{
+                "title": title,
+                "items": [{"state": state} for state, count in [("done", done), ("open", opened)] for _ in range(count)],
+            } for title, done, opened in sections],
+        } for name, sections in [
+            ("python/cpython", [("Pull requests", 35, 2), ("Issues", 31, 16)]),
+            ("glibc", [("Patches", 12, 5), ("Bugs", 2, 5)]),
+            ("python/typeshed", [("Pull requests", 10, 0)]),
+            ("sqlalchemy/sqlalchemy", [("Commits", 10, 0), ("Issues", 6, 1)]),
+            ("open-webui/open-webui", [("Pull requests", 8, 0), ("Issues", 6, 0)]),
         ]]
-        pages = {}
+        for lang in ("en", "ru"):
+            with self.subTest(lang=lang):
+                pages = {}
+                documents = []
 
-        def document(*args, **kwargs):
-            doc = SimpleDocTemplate(*args, **kwargs)
-            doc.afterFlowable = lambda block: pages.setdefault(block.getPlainText(), doc.page) if isinstance(block, Paragraph) else None
-            return doc
+                def document(*args, **kwargs):
+                    doc = SimpleDocTemplate(*args, **kwargs)
+                    doc.afterFlowable = lambda block: pages.setdefault(block.getPlainText(), doc.page) if isinstance(block, Paragraph) else None
+                    documents.append(doc)
+                    return doc
 
-        with tempfile.TemporaryDirectory() as directory:
-            with patch("build_cv.SimpleDocTemplate", side_effect=document):
-                build("ru", content, projects, Path(directory) / "cv.pdf")
-        for job in content["ru"]["experience"]:
-            company = f"{job['title']}, {job['company']}"
-            first_bullet = f"• {job['bullets'][0]}"
-            self.assertEqual(pages[company], pages[first_bullet], company)
+                with tempfile.TemporaryDirectory() as directory:
+                    with patch("build_cv.SimpleDocTemplate", side_effect=document):
+                        build(lang, content, projects, Path(directory) / "cv.pdf")
+                self.assertEqual(documents[0].page, 1)
+                for job in content[lang]["experience"]:
+                    company = f"{job['title']}, {job['company']}"
+                    for bullet in job["bullets"]:
+                        self.assertEqual(pages[company], pages[f"• {bullet}"], company)
+                for project in projects:
+                    self.assertTrue(any(text.startswith(project["name"] + " — ") for text in pages), project["name"])
 
     def test_invalid_data_does_not_produce_a_publishable_artifact(self):
         with tempfile.TemporaryDirectory() as directory:
