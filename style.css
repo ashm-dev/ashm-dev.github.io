@@ -55,6 +55,7 @@ h2 { margin: 2.5rem 0 0.75rem; font-size: 1rem; font-weight: 700; padding-bottom
 dl { display: grid; grid-template-columns: 13rem 1fr; gap: 0.5rem 1rem; margin: 0; }
 dt { color: var(--muted); }
 dd { margin: 0; }
+.oss-experience { margin-bottom: 1rem; }
 
 .muted { color: var(--muted); }
 
