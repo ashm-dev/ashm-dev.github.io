@@ -105,7 +105,7 @@ class BuildCVTest(unittest.TestCase):
                 "items": [{"state": state} for state, count in [("done", done), ("open", opened)] for _ in range(count)],
             } for title, done, opened in sections],
         } for name, sections in [
-            ("python/cpython", [("Pull requests", 35, 2), ("Issues", 31, 16)]),
+            ("python/cpython", [("Pull requests", 39, 2), ("Issues", 31, 16)]),
             ("glibc", [("Patches", 12, 5), ("Bugs", 2, 5)]),
             ("python/typeshed", [("Pull requests", 10, 0)]),
             ("sqlalchemy/sqlalchemy", [("Commits", 10, 0), ("Issues", 6, 1)]),

@@ -2,15 +2,15 @@
   "since": "2022-01",
   "en": {
     "name": "Shamil Abdulaev",
-    "role": "Staff Systems & Python Infrastructure Engineer · Saint Petersburg",
+    "role": "Systems & Python Infrastructure Engineer · Saint Petersburg",
     "contacts": [
       {"label": "GitHub", "url": "https://github.com/ashm-dev"},
       {"label": "LinkedIn", "url": "https://www.linkedin.com/in/ashm-tech/"},
       {"label": "Telegram", "url": "https://t.me/ashamil435"},
       {"label": "Email", "url": "mailto:ashamil435@gmail.com"}
     ],
-    "summary": "Systems and distributed platforms engineer with {years} of experience architecting high-throughput backend infrastructure, asynchronous engines (Litestar, Faust), and Go microservices. Core contributor to foundational open-source runtimes: 35+ merged PRs to CPython, 12 accepted patches to glibc, and 10 commits to SQLAlchemy. Proven expertise in architecting isolated multi-tenant PaaS, slashing deployment cycles by 90%, reducing sub-system p95 latency by 56%, and engineering enterprise-grade MCP servers for LLM-agent orchestration.",
-    "oss_summary": "Improved core global runtimes through 35+ merged PRs to CPython and 12 accepted patches to the foundational glibc system library, resolving critical memory safety anomalies, free-threading data races, and JIT compiler issues while optimizing low-level system calls and internal data structures.",
+    "summary": "Systems and distributed platforms engineer with {years} of experience architecting high-throughput backend infrastructure, asynchronous engines (Litestar, Faust), and Go microservices. Core contributor to foundational open-source runtimes: 39+ merged PRs to CPython, 12 accepted patches to glibc, and 10 commits to SQLAlchemy. Proven expertise in architecting isolated multi-tenant PaaS, slashing deployment cycles by 90%, reducing sub-system p95 latency by 56%, and engineering enterprise-grade MCP servers for LLM-agent orchestration.",
+    "oss_summary": "Improved core global runtimes through 39+ merged PRs to CPython and 12 accepted patches to the foundational glibc system library, resolving critical memory safety anomalies, free-threading data races, and JIT compiler issues while optimizing low-level system calls and internal data structures.",
     "site_label": "Site",
     "years": {"one": "{n} year", "few": "{n} years", "many": "{n} years"},
     "headings": {"experience": "Experience", "languages": "Languages", "oss": "Core Open-Source Contributions", "cv": "CV (PDF)"},
@@ -62,15 +62,15 @@
   },
   "ru": {
     "name": "Шамиль Абдулаев",
-    "role": "Staff / Principal Systems & Python Infrastructure Engineer · Санкт-Петербург",
+    "role": "Systems & Python Infrastructure Engineer · Санкт-Петербург",
     "contacts": [
       {"label": "GitHub", "url": "https://github.com/ashm-dev"},
       {"label": "LinkedIn", "url": "https://www.linkedin.com/in/ashm-tech/"},
       {"label": "Telegram", "url": "https://t.me/ashamil435"},
       {"label": "Почта", "url": "mailto:ashamil435@gmail.com"}
     ],
-    "summary": "Инженер распределённых систем и системной инфраструктуры ({years} опыта проектирования высоконагруженных платформ на Python, Go и C). Участник развития базового стека: 35+ принятых PR в CPython, 12 патчей в glibc, 10 коммитов в SQLAlchemy. Специализируюсь на проектировании мульти-тенантных PaaS, декомпозиции монолитов с сокращением Time-to-Market в 8–10 раз, оптимизации p95/p99 задержек и внедрении автономных LLM-агентов через Model Context Protocol (MCP).",
-    "oss_summary": "Усовершенствовал ядро глобального рантайма через 35+ принятых PR в CPython и 12 патчей в фундаментальную системную библиотеку glibc, устранив критические аномалии работы с памятью, состояния гонки (free-threading / subinterpreters), ошибки JIT-компилятора и оптимизировав системные вызовы для стандартной библиотеки.",
+    "summary": "Инженер распределённых систем и системной инфраструктуры ({years} опыта проектирования высоконагруженных платформ на Python, Go и C). Участник развития базового стека: 39+ принятых PR в CPython, 12 патчей в glibc, 10 коммитов в SQLAlchemy. Специализируюсь на проектировании мульти-тенантных PaaS, декомпозиции монолитов с сокращением Time-to-Market в 8–10 раз, оптимизации p95/p99 задержек и внедрении автономных LLM-агентов через Model Context Protocol (MCP).",
+    "oss_summary": "Усовершенствовал ядро глобального рантайма через 39+ принятых PR в CPython и 12 патчей в фундаментальную системную библиотеку glibc, устранив критические аномалии работы с памятью, состояния гонки (free-threading / subinterpreters), ошибки JIT-компилятора и оптимизировав системные вызовы для стандартной библиотеки.",
     "site_label": "Сайт",
     "years": {"one": "{n} год", "few": "{n} года", "many": "{n} лет"},
     "headings": {"experience": "Опыт", "languages": "Языки", "oss": "Ключевой вклад в Open Source", "cv": "Резюме (PDF)"},
