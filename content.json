@@ -25,7 +25,7 @@
     "experience": [
       {
         "company": "Kartochka (now Omnium)", "url": "https://omniumtech.ru", "title": "Python Developer",
-        "period": "Dec 2023 — now", "start": "2023-12", "end": null,
+        "period": "Nov 2023 — Nov 2026", "start": "2023-11", "end": "2026-11",
         "bullets": [
           {"lead": "Internal PaaS", "text": "Designed and launched an internal PaaS to deploy and operate isolated customer environments."},
           {"lead": "Services and deployment", "text": "Split a monolith into services and set up CI/CD. Reduced deployment time from several hours to 15 minutes."},
@@ -90,7 +90,7 @@
     "experience": [
       {
         "company": "Карточка (сейчас Omnium)", "url": "https://omniumtech.ru", "title": "Python-разработчик",
-        "period": "дек 2023 — н. в.", "start": "2023-12", "end": null,
+        "period": "ноя 2023 — ноя 2026", "start": "2023-11", "end": "2026-11",
         "bullets": [
           {"lead": "Внутренний PaaS", "text": "Спроектировал и запустил внутренний PaaS для развёртывания и сопровождения изолированных клиентских окружений."},
           {"lead": "Сервисы и деплой", "text": "Разделил монолит на сервисы и настроил CI/CD. Сократил время деплоя с нескольких часов до 15 минут."},
